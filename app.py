@@ -143,7 +143,7 @@ def render_home() -> None:
     if history:
         st.markdown("### Prediction History")
         history_df = pd.DataFrame(history)
-        st.dataframe(history_df, use_container_width=True, hide_index=True)
+        st.dataframe(history_df, width="stretch", hide_index=True)
     else:
         st.markdown(
             """
@@ -198,7 +198,7 @@ def render_prediction_page() -> None:
             smoking_alcohol = st.selectbox("Smoking or alcohol exposure", CATEGORY_OPTIONS["smoking_alcohol"])
             gender = st.selectbox("Gender", CATEGORY_OPTIONS["gender"])
 
-        submitted = st.form_submit_button("Run Prediction", use_container_width=True)
+        submitted = st.form_submit_button("Run Prediction", width="stretch")
 
     student = {
         "sleep_duration": sleep_duration,
@@ -272,10 +272,10 @@ def render_prediction_page() -> None:
 
     chart_left, chart_right = st.columns(2, gap="large")
     with chart_left:
-        st.plotly_chart(confidence_gauge(result.confidence), use_container_width=True)
+        st.plotly_chart(confidence_gauge(result.confidence), width="stretch")
     with chart_right:
-        st.plotly_chart(probability_chart(classes, probabilities), use_container_width=True)
-    st.plotly_chart(lifestyle_radar(latest["student"]), use_container_width=True)
+        st.plotly_chart(probability_chart(classes, probabilities), width="stretch")
+    st.plotly_chart(lifestyle_radar(latest["student"]), width="stretch")
 
     st.markdown("### General Recommendations")
     for item in recommendations:
@@ -303,7 +303,7 @@ def render_prediction_page() -> None:
             data=pdf_bytes,
             file_name="student_health_prediction_report.pdf",
             mime="application/pdf",
-            use_container_width=True,
+            width="stretch",
         )
     except RuntimeError as exc:
         st.warning(str(exc))

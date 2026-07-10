@@ -119,7 +119,7 @@ except Exception as exc:
 
 try:
     importance = build_feature_importance(predictor)
-    st.plotly_chart(feature_importance_chart(importance), use_container_width=True)
+    st.plotly_chart(feature_importance_chart(importance), width="stretch")
 except Exception as exc:
     st.warning(f"Feature importance could not be rendered: {exc}")
 
@@ -136,11 +136,11 @@ try:
                 predictor.encoder.inverse_transform(y_pred),
                 labels,
             ),
-            use_container_width=True,
+            width="stretch",
         )
     with right:
-        st.plotly_chart(roc_curve_chart(y_true, probabilities, labels), use_container_width=True)
-    st.plotly_chart(precision_recall_chart(y_true, probabilities, labels), use_container_width=True)
+        st.plotly_chart(roc_curve_chart(y_true, probabilities, labels), width="stretch")
+    st.plotly_chart(precision_recall_chart(y_true, probabilities, labels), width="stretch")
 except Exception as exc:
     LOGGER.exception("Diagnostic chart generation failed.")
     st.warning(f"Confusion matrix and curve generation failed: {exc}")

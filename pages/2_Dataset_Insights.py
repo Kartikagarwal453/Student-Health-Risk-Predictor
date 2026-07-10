@@ -50,8 +50,8 @@ tab_quality, tab_distribution, tab_relationships, tab_outliers = st.tabs(
 )
 
 with tab_quality:
-    st.plotly_chart(missing_values_chart(df), use_container_width=True)
-    st.dataframe(df.head(50), use_container_width=True, hide_index=True)
+    st.plotly_chart(missing_values_chart(df), width="stretch")
+    st.dataframe(df.head(50), width="stretch", hide_index=True)
 
 with tab_distribution:
     left, right = st.columns(2, gap="large")
@@ -60,17 +60,17 @@ with tab_distribution:
         selected_numeric = st.selectbox("Numerical feature", numeric_features)
         st.plotly_chart(
             numeric_distribution_chart(df, selected_numeric, TARGET_COLUMN),
-            use_container_width=True,
+            width="stretch",
         )
     with right:
         selected_category = st.selectbox("Categorical feature", categorical_features)
         st.plotly_chart(
             categorical_distribution_chart(df, selected_category, TARGET_COLUMN),
-            use_container_width=True,
+            width="stretch",
         )
 
 with tab_relationships:
-    st.plotly_chart(correlation_heatmap(df[numeric_features]), use_container_width=True)
+    st.plotly_chart(correlation_heatmap(df[numeric_features]), width="stretch")
 
 with tab_outliers:
     outlier_feature = st.selectbox("Feature for boxplot", numeric_features, key="outlier_feature")
@@ -82,5 +82,5 @@ with tab_outliers:
     outliers = df[(df[outlier_feature] < lower) | (df[outlier_feature] > upper)]
 
     metric_card("Outlier Count", f"{len(outliers):,}", f"IQR rule for {outlier_feature}")
-    st.plotly_chart(boxplot_chart(df, outlier_feature, TARGET_COLUMN), use_container_width=True)
-    st.dataframe(outliers.head(100), use_container_width=True, hide_index=True)
+    st.plotly_chart(boxplot_chart(df, outlier_feature, TARGET_COLUMN), width="stretch")
+    st.dataframe(outliers.head(100), width="stretch", hide_index=True)

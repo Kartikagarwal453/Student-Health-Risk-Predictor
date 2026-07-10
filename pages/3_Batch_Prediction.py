@@ -120,19 +120,19 @@ left, right = st.columns([0.8, 1.2], gap="large")
 with left:
     st.plotly_chart(
         prediction_pie_chart(predictions["predicted_health_condition"]),
-        use_container_width=True,
+        width="stretch",
     )
 with right:
     counts = predictions["predicted_health_condition"].value_counts().reset_index()
     counts.columns = ["Prediction", "Count"]
-    st.dataframe(counts, use_container_width=True, hide_index=True)
+    st.dataframe(counts, width="stretch", hide_index=True)
 
 st.markdown("### Prediction Output")
-st.dataframe(predictions, use_container_width=True, hide_index=True)
+st.dataframe(predictions, width="stretch", hide_index=True)
 st.download_button(
     "Download Prediction CSV",
     data=predictions.to_csv(index=False).encode("utf-8"),
     file_name="student_health_batch_predictions.csv",
     mime="text/csv",
-    use_container_width=True,
+    width="stretch",
 )
