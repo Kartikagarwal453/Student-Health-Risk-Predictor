@@ -1,0 +1,9 @@
+{
+    "model":"XGBoost",
+    "accuracy":96.59,
+    "balanced_accuracy":86.01,
+    "macro_f1":90.48,
+    "algorithm":"Extreme Gradient Boosting",
+    "dataset":"Student Health Risk Dataset",
+    "version":"1.0.0"
+}
