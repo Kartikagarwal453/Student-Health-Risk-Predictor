@@ -15,11 +15,3 @@ env/
 .DS_Store
 
 *.log
-
-*.pkl
-
-*.csv
-
-*.xlsx
-
-*.zip
