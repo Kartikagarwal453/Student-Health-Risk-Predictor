@@ -8,13 +8,6 @@ from datetime import datetime
 import pandas as pd
 import streamlit as st
 
-st.set_page_config(
-    page_title="Student Health Risk Predictor",
-    page_icon="🏥",          # or "assets/logo.png"
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
 from utils.charts import confidence_gauge, lifestyle_radar, probability_chart
 from utils.constants import (
     APP_SHORT_TITLE,
@@ -42,7 +35,7 @@ LOGGER = logging.getLogger(__name__)
 
 st.set_page_config(
     page_title=APP_SHORT_TITLE,
-    page_icon="H",
+    page_icon="🏥",
     layout="wide",
     initial_sidebar_state="expanded",
 )
