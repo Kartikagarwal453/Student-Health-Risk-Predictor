@@ -4,14 +4,21 @@ from __future__ import annotations
 
 import streamlit as st
 
-from utils.constants import APP_SHORT_TITLE, APP_TITLE, MODEL_METRICS, RAW_FEATURES
-from utils.helpers import load_css, metric_card
+from utils.constants import APP_TITLE, APP_TAGLINE, LOGO_PATH, MODEL_METRICS, RAW_FEATURES
+from utils.helpers import load_css, metric_card, page_intro, render_footer, render_header, render_sidebar
 
 
-st.set_page_config(page_title=f"{APP_SHORT_TITLE} | About", page_icon="A", layout="wide")
 load_css()
+render_sidebar()
+render_header()
 
-st.title("About")
+page_intro("About Student Health AI", "A thoughtfully designed health-risk intelligence experience for modern student wellbeing programs.")
+if LOGO_PATH.exists():
+    left, right = st.columns([1, 4], vertical_alignment="center")
+    with left:
+        st.image(str(LOGO_PATH), width="stretch")
+    with right:
+        st.markdown(f"<div class='panel'><p class='eyebrow'>{APP_TAGLINE}</p><h3>{APP_TITLE}</h3><p>Practical machine-learning intelligence for earlier, more informed student health conversations.</p></div>", unsafe_allow_html=True)
 st.markdown(
     f"""
     <div class="panel">
@@ -35,7 +42,7 @@ with cols[1]:
 with cols[2]:
     metric_card("Macro F1", f"{MODEL_METRICS['Macro F1']:.2f}%", "Portfolio headline")
 
-st.markdown("### Application Features")
+st.markdown("### Platform Capabilities")
 st.markdown(
     """
     - Individual student risk prediction with confidence and probability charts.
@@ -59,3 +66,7 @@ st.markdown(
     and launch with `streamlit run app.py`.
     """
 )
+
+st.markdown("### Technology & Architecture")
+st.markdown("<div class='panel'><h3>Built for dependable decisions</h3><p><b>Data layer:</b> Pandas and scikit-learn preprocessing · <b>Model layer:</b> XGBoost multi-class classification · <b>Experience layer:</b> Streamlit, Plotly, PDF reporting, and responsive accessibility-first interface patterns.</p><p><a class='social-button' href='https://github.com/' target='_blank'>GitHub ↗</a> <a class='social-button' href='https://www.linkedin.com/' target='_blank'>LinkedIn ↗</a></p></div>", unsafe_allow_html=True)
+render_footer()

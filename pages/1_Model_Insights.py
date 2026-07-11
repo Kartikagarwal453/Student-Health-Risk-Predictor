@@ -16,7 +16,6 @@ from utils.charts import (
     roc_curve_chart,
 )
 from utils.constants import (
-    APP_SHORT_TITLE,
     FEATURED_TRAIN_DATA_PATH,
     MODEL_METRICS,
     MODEL_NAME,
@@ -24,14 +23,15 @@ from utils.constants import (
     TARGET_COLUMN,
 )
 from utils.feature_engineering import create_features
-from utils.helpers import load_css, metric_card
+from utils.helpers import load_css, metric_card, page_intro, render_footer, render_header, render_sidebar
 from utils.predictor import HealthPredictor
 
 
 LOGGER = logging.getLogger(__name__)
 
-st.set_page_config(page_title=f"{APP_SHORT_TITLE} | Model Insights", page_icon="M", layout="wide")
 load_css()
+render_sidebar()
+render_header()
 
 
 @st.cache_resource(show_spinner=False)
@@ -81,8 +81,7 @@ def predict_sample(predictor: HealthPredictor, frame: pd.DataFrame) -> tuple[np.
     return encoded_true, encoded_pred, probabilities
 
 
-st.title("Model Insights")
-st.caption("Architecture, validation metrics, feature importance, performance curves, and SHAP explainability.")
+page_intro("Model Insights", "Architecture, validation metrics, feature importance, performance curves, and explainable AI.")
 
 metrics = st.columns(5)
 with metrics[0]:
@@ -186,3 +185,5 @@ try:
     st.pyplot(plt.gcf(), clear_figure=True)
 except Exception as exc:
     st.info(f"SHAP explanations are available when compatible SHAP/XGBoost dependencies load successfully. Details: {exc}")
+
+render_footer()

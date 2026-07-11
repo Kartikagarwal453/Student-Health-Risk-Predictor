@@ -8,13 +8,14 @@ import pandas as pd
 import streamlit as st
 
 from utils.charts import prediction_pie_chart
-from utils.constants import APP_SHORT_TITLE, RAW_FEATURES
-from utils.helpers import load_css, metric_card
+from utils.constants import RAW_FEATURES
+from utils.helpers import load_css, metric_card, page_intro, render_footer, render_header, render_sidebar
 from utils.predictor import HealthPredictor
 
 
-st.set_page_config(page_title=f"{APP_SHORT_TITLE} | Batch Prediction", page_icon="B", layout="wide")
 load_css()
+render_sidebar()
+render_header()
 
 
 @st.cache_resource(show_spinner=False)
@@ -51,8 +52,7 @@ def template_csv() -> str:
     return buffer.getvalue()
 
 
-st.title("Batch Prediction")
-st.caption("Upload a CSV, automatically engineer features, preprocess records, and download predictions.")
+page_intro("Batch Prediction", "Upload a CSV, score student records securely, and export prediction-ready results.")
 
 with st.expander("Required CSV columns", expanded=False):
     st.code(", ".join(RAW_FEATURES))
@@ -136,3 +136,4 @@ st.download_button(
     mime="text/csv",
     width="stretch",
 )
+render_footer()

@@ -24,6 +24,9 @@ from utils.helpers import (
     load_metadata,
     metric_card,
     prediction_badge_class,
+    render_footer,
+    render_header,
+    render_sidebar,
 )
 from utils.predictor import HealthPredictor
 from utils.recommendations import generate_recommendations
@@ -34,8 +37,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 LOGGER = logging.getLogger(__name__)
 
 st.set_page_config(
-    page_title=APP_SHORT_TITLE,
-    page_icon="🏥",
+    page_title=APP_TITLE,
+    page_icon="assets/logo.png",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -55,28 +58,6 @@ def initialize_state() -> None:
     st.session_state.setdefault("prediction_history", [])
 
 
-def build_sidebar() -> None:
-    """Render consistent sidebar project information."""
-
-    st.sidebar.markdown(
-        """
-        <div class="sidebar-brand">
-            <div class="brand-icon">H</div>
-            <div>
-                <strong>Student Health AI</strong>
-                <span>Risk intelligence dashboard</span>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    st.sidebar.info(
-        "Use the prediction page for individual students, then open the insights "
-        "pages from the Streamlit navigation."
-    )
-    st.sidebar.caption("Portfolio-grade ML application powered by XGBoost.")
-
-
 def render_home() -> None:
     """Render the landing dashboard section."""
 
@@ -88,25 +69,22 @@ def render_home() -> None:
         else 0
     )
 
-    st.markdown(
-        """
-        <section class="hero">
-            <div>
-                <p class="eyebrow">Machine Learning Health Risk Screening</p>
-                <h1>AI Powered Student Health Risk Prediction System</h1>
-                <p>
-                    Predict fit, at-risk, and unhealthy student profiles from lifestyle,
-                    health, and personal indicators using a trained XGBoost classifier.
-                </p>
-            </div>
-        </section>
-        """,
-        unsafe_allow_html=True,
-    )
+    hero_text, hero_logo = st.columns([4, 1], vertical_alignment="center")
+    with hero_text:
+        st.markdown("""<section class="hero"><p class="eyebrow">HEALTH INTELLIGENCE PLATFORM</p><h1>AI Powered Student Health Risk Prediction System</h1><p>Turn everyday lifestyle signals into clear, actionable health-risk intelligence—powered by a validated XGBoost model.</p></section>""", unsafe_allow_html=True)
+        action_one, action_two = st.columns(2)
+        with action_one:
+            st.markdown("<a class='hero-button primary' href='#individual-student-prediction'>Start Prediction <span>→</span></a>", unsafe_allow_html=True)
+        with action_two:
+            st.page_link("pages/1_Model_Insights.py", label="Model Insights", icon="📊")
+    with hero_logo:
+        from utils.constants import LOGO_PATH
+        if LOGO_PATH.exists():
+            st.image(str(LOGO_PATH), width="stretch")
 
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
-        metric_card("Model", MODEL_NAME, f"v{metadata.get('version', '1.0.0')}")
+        metric_card("Model", "XGBoost", f"v{metadata.get('version', '1.0.0')}")
     with col2:
         metric_card("Accuracy", f"{MODEL_METRICS['Accuracy']:.2f}%", "Validation")
     with col3:
@@ -114,7 +92,7 @@ def render_home() -> None:
     with col4:
         metric_card("Macro F1", f"{MODEL_METRICS['Macro F1']:.2f}%", "Class weighted")
     with col5:
-        metric_card("Students Predicted", str(len(history)), "This session")
+        metric_card("Prediction History", str(len(history)), "This session")
 
     st.markdown("### Dashboard")
     left, right = st.columns([1.1, 0.9], gap="large")
@@ -158,6 +136,7 @@ def render_home() -> None:
 def render_prediction_page() -> None:
     """Render the individual prediction workflow."""
 
+    st.markdown("<div id='individual-student-prediction'></div>", unsafe_allow_html=True)
     st.markdown("## Individual Student Prediction")
     st.caption("Enter student information, run the trained model, and export a PDF summary.")
 
@@ -313,12 +292,14 @@ def main() -> None:
     """Run the Streamlit app."""
 
     initialize_state()
-    build_sidebar()
+    render_sidebar()
+    render_header(len(st.session_state["prediction_history"]))
     tabs = st.tabs(["Home Dashboard", "Prediction"])
     with tabs[0]:
         render_home()
     with tabs[1]:
         render_prediction_page()
+    render_footer()
 
 
 if __name__ == "__main__":

@@ -11,14 +11,15 @@ import plotly.graph_objects as go
 from sklearn.metrics import auc, confusion_matrix, precision_recall_curve, roc_curve
 from sklearn.preprocessing import label_binarize
 
-from utils.constants import CLASS_COLORS, PLOTLY_TEMPLATE
+from utils.constants import CLASS_COLORS
+from utils.helpers import plotly_template
 
 
 def _layout(fig: go.Figure, height: int = 420) -> go.Figure:
     """Apply consistent layout defaults."""
 
     fig.update_layout(
-        template=PLOTLY_TEMPLATE,
+        template=plotly_template(),
         height=height,
         margin=dict(t=70, b=35, l=35, r=30),
         font=dict(family="Inter, Segoe UI, sans-serif"),

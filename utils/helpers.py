@@ -3,13 +3,17 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
 import streamlit as st
 
-from utils.constants import METADATA_PATH, MODEL_METRICS
+from utils.constants import (
+    APP_SHORT_TITLE, APP_TAGLINE, APP_TITLE, APP_VERSION, AUTHOR, LOGO_PATH,
+    METADATA_PATH, MODEL_METRICS, MODEL_NAME,
+)
 
 
 def load_css(css_path: str | Path = "style.css") -> None:
@@ -18,6 +22,52 @@ def load_css(css_path: str | Path = "style.css") -> None:
     path = Path(css_path)
     if path.exists():
         st.markdown(f"<style>{path.read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
+
+
+def plotly_template() -> str:
+    """Use the configured Streamlit theme for Plotly figures."""
+
+    return "plotly_dark" if (st.get_option("theme.base") or "light") == "dark" else "plotly_white"
+
+
+def render_sidebar() -> None:
+    """Render the shared application navigation and product metadata."""
+
+    if LOGO_PATH.exists():
+        st.sidebar.image(str(LOGO_PATH), width=58)
+    st.sidebar.markdown(f"<div class='sidebar-brand'><strong>{APP_SHORT_TITLE}</strong><span>{APP_TAGLINE}</span></div>", unsafe_allow_html=True)
+    st.sidebar.markdown("<div class='sidebar-divider'></div><p class='nav-label'>NAVIGATION</p>", unsafe_allow_html=True)
+    for label, path, icon in [
+        ("Home", "app.py", "🏠"),
+        ("Prediction", "app.py", "🧪"),
+        ("Model Insights", "pages/1_Model_Insights.py", "📊"),
+        ("Dataset Insights", "pages/2_Dataset_Insights.py", "📈"),
+        ("Batch Prediction", "pages/3_Batch_Prediction.py", "📁"),
+        ("About", "pages/4_About.py", "ℹ️"),
+    ]:
+        st.sidebar.page_link(path, label=label, icon=icon)
+    theme_name = (st.get_option("theme.base") or "light").title()
+    st.sidebar.markdown("<div class='sidebar-footer'><span>VERSION</span><strong>v" + APP_VERSION + "</strong><span>DEVELOPER</span><strong>" + AUTHOR + "</strong><span>MODEL</span><strong>XGBoost</strong><span>THEME</span><strong>" + theme_name + "</strong></div>", unsafe_allow_html=True)
+
+
+def render_header(prediction_count: int = 0) -> None:
+    """Render a consistent compact product header."""
+
+    logo = f"<img src='data:image/png;base64,{__import__('base64').b64encode(LOGO_PATH.read_bytes()).decode()}' />" if LOGO_PATH.exists() else ""
+    theme_name = (st.get_option("theme.base") or "light").title()
+    st.markdown(f"<div class='topbar'>{logo}<div class='topbar-title'><strong>{APP_TITLE}</strong><span>{APP_TAGLINE}</span></div><div class='topbar-stat'><span>MODEL</span><strong>XGBoost</strong></div><div class='topbar-stat'><span>PREDICTIONS</span><strong>{prediction_count}</strong></div><div class='topbar-stat time'><span>LOCAL TIME</span><strong>{datetime.now().strftime('%H:%M')}</strong></div><div class='theme-dot'>{theme_name}</div></div>", unsafe_allow_html=True)
+
+
+def render_footer() -> None:
+    """Render the shared professional footer."""
+
+    st.markdown(f"<footer>Made with <span>♥</span> using Python · Streamlit · XGBoost · Plotly · Scikit-learn <b>v{APP_VERSION}</b></footer>", unsafe_allow_html=True)
+
+
+def page_intro(title: str, description: str) -> None:
+    """Render a reusable page title treatment."""
+
+    st.markdown(f"<section class='page-intro'><p>{APP_TAGLINE}</p><h1>{title}</h1><span>{description}</span></section>", unsafe_allow_html=True)
 
 
 def load_metadata() -> dict[str, Any]:

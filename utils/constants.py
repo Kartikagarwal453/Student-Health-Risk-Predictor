@@ -8,7 +8,10 @@ MODEL_DIR = BASE_DIR / "model"
 DATASET_DIR = BASE_DIR / "dataset"
 
 APP_TITLE = "AI Powered Student Health Risk Prediction System"
-APP_SHORT_TITLE = "Student Health Risk Predictor"
+APP_SHORT_TITLE = "Student Health AI"
+APP_TAGLINE = "Predict • Analyze • Improve"
+APP_VERSION = "1.0.0"
+LOGO_PATH = BASE_DIR / "assets" / "logo.png"
 MODEL_NAME = "XGBoost Classifier"
 MODEL_VERSION = "1.0.0"
 AUTHOR = "Kartik Agarwal"
@@ -86,5 +89,3 @@ CLASS_COLORS = {
     "at-risk": "#f59e0b",
     "unhealthy": "#dc2626",
 }
-
-PLOTLY_TEMPLATE = "plotly_white"

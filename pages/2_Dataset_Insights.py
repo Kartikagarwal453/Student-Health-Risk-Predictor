@@ -13,12 +13,13 @@ from utils.charts import (
     missing_values_chart,
     numeric_distribution_chart,
 )
-from utils.constants import APP_SHORT_TITLE, RAW_FEATURES, TARGET_COLUMN, TRAIN_DATA_PATH
-from utils.helpers import load_css, metric_card
+from utils.constants import RAW_FEATURES, TARGET_COLUMN, TRAIN_DATA_PATH
+from utils.helpers import load_css, metric_card, page_intro, render_footer, render_header, render_sidebar
 
 
-st.set_page_config(page_title=f"{APP_SHORT_TITLE} | Dataset Insights", page_icon="D", layout="wide")
 load_css()
+render_sidebar()
+render_header()
 
 
 @st.cache_data(show_spinner=False)
@@ -28,8 +29,7 @@ def load_dataset(rows: int = 50000) -> pd.DataFrame:
     return pd.read_csv(TRAIN_DATA_PATH, nrows=rows)
 
 
-st.title("Dataset Insights")
-st.caption("Explore quality, distributions, relationships, and outliers in the student health dataset.")
+page_intro("Dataset Insights", "Explore data quality, distributions, relationships, and outliers across the student health dataset.")
 
 df = load_dataset()
 numeric_features = df[RAW_FEATURES].select_dtypes(include="number").columns.tolist()
@@ -84,3 +84,5 @@ with tab_outliers:
     metric_card("Outlier Count", f"{len(outliers):,}", f"IQR rule for {outlier_feature}")
     st.plotly_chart(boxplot_chart(df, outlier_feature, TARGET_COLUMN), width="stretch")
     st.dataframe(outliers.head(100), width="stretch", hide_index=True)
+
+render_footer()
