@@ -68,5 +68,5 @@ st.markdown(
 )
 
 st.markdown("### Technology & Architecture")
-st.markdown("<div class='panel'><h3>Built for dependable decisions</h3><p><b>Data layer:</b> Pandas and scikit-learn preprocessing · <b>Model layer:</b> XGBoost multi-class classification · <b>Experience layer:</b> Streamlit, Plotly, PDF reporting, and responsive accessibility-first interface patterns.</p><p><a class='social-button' href='https://github.com/' target='_blank'>GitHub ↗</a> <a class='social-button' href='https://www.linkedin.com/' target='_blank'>LinkedIn ↗</a></p></div>", unsafe_allow_html=True)
+st.markdown("<div class='panel'><h3>Built for dependable decisions</h3><p><b>· Data layer:</b> Pandas and scikit-learn preprocessing <br> <b>· Model layer:</b> XGBoost multi-class classification <br><b>· Experience layer:</b> Streamlit, Plotly, PDF reporting, and responsive accessibility-first interface patterns.</p><p><a class='social-button' href='https://github.com/Kartikagarwal453/Student-Health-Risk-Predictor' target='_blank'>GitHub ↗</a> <a class='social-button' href='https://www.linkedin.com/in/kartik-agarwall/' target='_blank'>LinkedIn ↗</a></p></div>", unsafe_allow_html=True)
 render_footer()

@@ -69,18 +69,21 @@ def render_home() -> None:
         else 0
     )
 
-    hero_text, hero_logo = st.columns([4, 1], vertical_alignment="center")
-    with hero_text:
-        st.markdown("""<section class="hero"><p class="eyebrow">HEALTH INTELLIGENCE PLATFORM</p><h1>AI Powered Student Health Risk Prediction System</h1><p>Turn everyday lifestyle signals into clear, actionable health-risk intelligence—powered by a validated XGBoost model.</p></section>""", unsafe_allow_html=True)
-        action_one, action_two = st.columns(2)
-        with action_one:
-            st.markdown("<a class='hero-button primary' href='#individual-student-prediction'>Start Prediction <span>→</span></a>", unsafe_allow_html=True)
-        with action_two:
-            st.page_link("pages/1_Model_Insights.py", label="Model Insights", icon="📊")
-    with hero_logo:
-        from utils.constants import LOGO_PATH
-        if LOGO_PATH.exists():
-            st.image(str(LOGO_PATH), width="stretch")
+    st.markdown(
+        """
+        <section class="hero">
+            <p class="eyebrow">HEALTH INTELLIGENCE PLATFORM</p>
+            <h1>AI Powered Student Health Risk Prediction System</h1>
+            <p>Turn everyday lifestyle signals into clear, actionable health-risk intelligence—powered by a validated XGBoost model.</p>
+        </section>
+        <div class="hero-actions">
+            <a class="hero-button primary" href="/Model_Insights">Model Insights</a>
+            <a class="hero-button primary" href="/Dataset_Insights">Dataset Insights</a>
+            <a class="hero-button primary" href="/About">About</a>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
