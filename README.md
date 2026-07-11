@@ -105,7 +105,7 @@ The following classification algorithms were trained and compared:
 | Metric | Score |
 |---------|--------|
 | Accuracy | **96.59%** |
-| Balanced Accuracy | **90%+** |
+| Balanced Accuracy | **86.01%** |
 | Macro F1 Score | **90.48%** |
 
 ---
