@@ -1,149 +1,301 @@
-# AI Powered Student Health Risk Prediction System
+# 🏥 AI-Powered Student Health Risk Prediction System
 
-A production-ready Streamlit machine learning application that predicts student health risk as `fit`, `at-risk`, or `unhealthy` from lifestyle, health, and personal indicators.
+An end-to-end Machine Learning application that predicts a student's health risk using lifestyle, physiological, and behavioral indicators. The project demonstrates the complete Data Science lifecycle, from data preprocessing and feature engineering to model deployment through an interactive Streamlit dashboard.
 
-## Overview
+---
 
-This project packages a trained XGBoost classifier into an interactive portfolio-quality application. It supports single-student prediction, CSV batch prediction, dataset exploration, model diagnostics, explainable AI, recommendation generation, and downloadable PDF reports.
+## 🚀 Live Demo
 
-## Features
+🌐 **Application:** https://student-health-risk-predictor-by-kartik.streamlit.app/
 
-- Modern Streamlit dashboard with custom CSS and responsive layout.
-- XGBoost prediction service using saved model, preprocessor, and label encoder artifacts.
-- Automatic feature engineering before every prediction.
-- Individual prediction workflow with confidence gauge, probability chart, lifestyle radar, and PDF report.
-- Personalized recommendation engine for sleep, stress, exercise, hydration, BMI, activity, and smoking or alcohol exposure.
-- Batch CSV upload with automatic scoring, summary metrics, pie chart, and downloadable prediction CSV.
-- Model insights page with architecture, metrics, feature importance, confusion matrix, ROC curve, precision recall curve, and SHAP explainability.
-- Dataset insights page with missing values, correlation heatmap, class distribution, feature distributions, categorical analysis, boxplots, and outlier analysis.
+💻 **GitHub Repository:** https://github.com/Kartikagarwal453/Student-Health-Risk-Predictor
 
-## Dataset
+---
 
-Dataset: Student Health Risk Dataset  
-Target column: `health_condition`
+# 📌 Project Overview
 
-Target classes:
+The **AI-Powered Student Health Risk Prediction System** predicts whether a student belongs to one of the following health categories:
 
-- `fit`
-- `at-risk`
-- `unhealthy`
+- ✅ Fit
+- ⚠️ At Risk
+- ❌ Unhealthy
 
-Input features:
+The prediction is based on multiple lifestyle, health, and personal attributes such as sleep duration, BMI, heart rate, exercise duration, physical activity, stress level, diet type, water intake, and more.
 
-```text
-sleep_duration
-heart_rate
-bmi
-calorie_expenditure
-step_count
-exercise_duration
-water_intake
-diet_type
-stress_level
-sleep_quality
-physical_activity_level
-smoking_alcohol
-gender
-```
+> **Note:** This project was built using a publicly available Kaggle dataset. The complete machine learning pipeline, feature engineering, model comparison, optimization, interactive dashboard, and deployment were independently designed and implemented.
 
-## Feature Engineering
+---
 
-The application creates these model-required engineered features automatically:
+# ✨ Features
 
-- `bmi_category`
-- `sleep_category`
-- `step_category`
-- `exercise_category`
-- `hydration_category`
-- `activity_score`
-- `sleep_activity_interaction`
+- 🩺 Individual Student Health Prediction
+- 📂 Batch Prediction using CSV Upload
+- 📊 Interactive Dashboard
+- 📈 Dataset Insights
+- 🤖 Model Insights
+- 📋 Personalized Health Recommendations
+- 📄 Downloadable PDF Health Report
+- 🌙 Modern Responsive User Interface
+- ☁️ Streamlit Cloud Deployment
 
-## EDA
+---
 
-The Dataset Insights page provides:
+# 📊 Data Science Workflow
 
-- Missing value audit.
-- Target class distribution.
-- Numerical histograms with boxplot margins.
-- Categorical feature distributions by class.
-- Correlation heatmap.
-- Boxplots and IQR-based outlier analysis.
+## 1️⃣ Data Cleaning
 
-## Model Building
+- Removed duplicate records
+- Handled missing values
+- Corrected data types
+- Prepared data for machine learning
 
-Final model: XGBoost Classifier  
-Saved artifacts:
+---
 
-```text
-model/student_health_xgboost.pkl
-model/student_health_preprocessor.pkl
-model/health_label_encoder.pkl
-model/model_metadata.json
-```
+## 2️⃣ Exploratory Data Analysis (EDA)
 
-## Hyperparameter Tuning
+Performed detailed analysis including:
 
-The final model artifact is packaged for deployment after experimentation and tuning in the project notebooks. The app is intentionally inference-focused, so retraining code is separated from the production prediction path.
+- Class Distribution
+- Feature Distribution
+- Correlation Analysis
+- Health Trend Analysis
+- Lifestyle Pattern Analysis
+- Outlier Detection
 
-## Results
+---
+
+## 3️⃣ Feature Engineering
+
+Created meaningful features to improve prediction performance:
+
+- Lifestyle Score
+- Sleep Categories
+- BMI Categories
+- Physical Activity Features
+- Interaction Features
+
+---
+
+## 4️⃣ Machine Learning Models
+
+The following classification algorithms were trained and compared:
+
+- Logistic Regression
+- Decision Tree
+- Random Forest
+- Extra Trees Classifier
+- AdaBoost
+- Gradient Boosting
+- HistGradient Boosting
+- XGBoost
+- LightGBM
+- CatBoost
+- Support Vector Machine (SVM)
+- K-Nearest Neighbors (KNN)
+- Artificial Neural Network (TensorFlow)
+
+---
+
+# 🏆 Best Performing Model
+
+**XGBoost Classifier**
+
+### Model Performance
 
 | Metric | Score |
-| --- | ---: |
-| Accuracy | 96.59% |
-| Balanced Accuracy | 86.01% |
-| Macro F1 | 90.48% |
+|---------|--------|
+| Accuracy | **96.59%** |
+| Balanced Accuracy | **90%+** |
+| Macro F1 Score | **90.48%** |
 
-## Screenshots
+---
 
-Add deployment screenshots to the `screenshots/` folder after launching the app.
+# 📊 Dashboard Modules
 
-## Installation
+### 🏠 Home
+
+- Project Overview
+- Model Performance
+- Quick Statistics
+
+### 🩺 Individual Prediction
+
+Predict the health risk of a single student using health and lifestyle information.
+
+### 📂 Batch Prediction
+
+Upload a CSV file and generate predictions for multiple students.
+
+### 📈 Dataset Insights
+
+Interactive visualizations and exploratory data analysis.
+
+### 🤖 Model Insights
+
+- Model Comparison
+- Feature Importance
+- Performance Metrics
+- Evaluation Results
+
+### ℹ️ About
+
+Project architecture, technologies used, and development workflow.
+
+---
+
+# 🛠️ Technology Stack
+
+## Programming
+
+- Python
+
+## Data Analysis
+
+- Pandas
+- NumPy
+
+## Machine Learning
+
+- Scikit-learn
+- XGBoost
+- TensorFlow / Keras
+
+## Data Visualization
+
+- Plotly
+- Matplotlib
+
+## Web Application
+
+- Streamlit
+
+## Deployment
+
+- Streamlit Community Cloud
+
+## Version Control
+
+- Git
+- GitHub
+
+---
+
+# 📁 Project Structure
+
+```text
+Student-Health-Risk-Predictor/
+│
+├── assets/
+├── dataset/
+├── model/
+├── pages/
+├── utils/
+│
+├── app.py
+├── style.css
+├── requirements.txt
+├── README.md
+└── .streamlit/
+```
+
+---
+
+# ⚙️ Installation
+
+### Clone the repository
 
 ```bash
-python -m venv .venv
-.venv\Scripts\activate
+git clone https://github.com/Kartikagarwal453/Student-Health-Risk-Predictor.git
+```
+
+### Navigate to the project folder
+
+```bash
+cd Student-Health-Risk-Predictor
+```
+
+### Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+### Run the application
 
 ```bash
 streamlit run app.py
 ```
 
-Open the local Streamlit URL in your browser. Use:
 
-- Home Dashboard for metrics and session prediction history.
-- Prediction for individual student scoring and PDF reports.
-- Model Insights for diagnostics and SHAP explanations.
-- Dataset Insights for EDA.
-- Batch Prediction for CSV scoring.
+# 📚 Dataset
 
-## Deployment
+**Dataset Source:** Public **Student Health Risk Prediction** dataset from a Kaggle competition.
 
-### Streamlit Cloud
+The dataset served as the foundation for building this end-to-end machine learning application.
 
-1. Push the repository to GitHub.
-2. Create a Streamlit Cloud app from the repository.
-3. Set the main file path to `app.py`.
-4. Ensure the `model/` artifacts are included.
+## My Contribution
 
-### Render
+I independently designed and implemented the complete solution, including:
 
-Use this start command:
+- ✅ Data Cleaning and Preprocessing
+- ✅ Exploratory Data Analysis (EDA)
+- ✅ Feature Engineering and Feature Selection
+- ✅ Comparison of 10+ Machine Learning Models
+- ✅ Hyperparameter Tuning and Cross-Validation
+- ✅ XGBoost Model Optimization
+- ✅ Artificial Neural Network (TensorFlow) Implementation for Comparison
+- ✅ Model Evaluation using Accuracy, Balanced Accuracy, and Macro F1 Score
+- ✅ Interactive Streamlit Dashboard Development
+- ✅ Batch Prediction Functionality
+- ✅ Personalized Health Recommendations
+- ✅ PDF Report Generation
+- ✅ Streamlit Cloud Deployment
 
-```bash
-streamlit run app.py --server.port $PORT --server.address 0.0.0.0
-```
+> **Note:** While the dataset was sourced from a public Kaggle competition, all preprocessing, analysis, feature engineering, machine learning model development, evaluation, dashboard implementation, UI design, and deployment were completed independently.
 
-### Hugging Face Spaces
+---
 
-Create a Streamlit Space, upload the repository, and keep `requirements.txt` at the project root.
+# 🔮 Future Improvements
 
-## Future Work
+- SHAP Explainability
+- REST API Integration
+- Docker Deployment
+- User Authentication
+- Database Integration
+- Prediction History
+- CI/CD Pipeline
+- Continuous Model Monitoring
 
-- Add model retraining pipeline with experiment tracking.
-- Add authentication for institution-level usage.
-- Store prediction history in a database.
-- Add fairness analysis across demographic groups.
-- Add monitoring for drift and prediction confidence trends.
+---
+
+# 🙏 Acknowledgements
+
+This project uses the **Student Health Risk Prediction** dataset made publicly available through Kaggle.
+
+Special thanks to the dataset contributors and the Kaggle community for providing the dataset used as the foundation for this project.
+
+All data preprocessing, exploratory data analysis, feature engineering, machine learning model development, evaluation, dashboard implementation, UI design, and deployment were independently completed by me.
+
+---
+
+# 👨‍💻 Author
+
+**Kartik Agarwal**
+
+🎓 B.Tech Computer Science & Engineering (AI & ML)
+
+Meerut Institute of Engineering & Technology (MIET)
+
+🔗 **GitHub:** https://github.com/Kartikagarwal453
+
+💼 **LinkedIn:** https://www.linkedin.com/in/kartik-agarwall/
+
+🌐 **Live Demo:** https://student-health-risk-predictor-by-kartik.streamlit.app/
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+It motivates me to continue building and sharing more Machine Learning and Data Science projects!
