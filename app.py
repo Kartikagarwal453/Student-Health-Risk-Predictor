@@ -140,8 +140,7 @@ def render_prediction_page() -> None:
     """Render the individual prediction workflow."""
 
     st.markdown("<div id='individual-student-prediction'></div>", unsafe_allow_html=True)
-    st.markdown("## Individual Student Prediction")
-    st.caption("Enter student information, run the trained model, and export a PDF summary.")
+    st.markdown("<div class='assessment-intro'><p>AI HEALTH ASSESSMENT</p><h2>Student Health Assessment</h2><span>Complete the lifestyle, health, and personal profile to generate a risk assessment.</span></div>", unsafe_allow_html=True)
 
     try:
         predictor = get_predictor()
@@ -150,35 +149,33 @@ def render_prediction_page() -> None:
         st.stop()
 
     with st.form("student_prediction_form"):
-        lifestyle, health, personal = st.columns(3, gap="large")
+        lifestyle, health = st.columns(2, gap="large")
         with lifestyle:
-            st.markdown("#### Lifestyle")
-            sleep_duration = st.slider("Sleep duration (hours)", 3.0, 11.0, NUMERIC_DEFAULTS["sleep_duration"], 0.5)
-            step_count = st.number_input("Daily steps", 0, 30000, NUMERIC_DEFAULTS["step_count"], step=500)
-            exercise_duration = st.slider("Exercise duration (minutes)", 0, 240, NUMERIC_DEFAULTS["exercise_duration"], 5)
-            water_intake = st.slider("Water intake (liters)", 0.5, 6.0, NUMERIC_DEFAULTS["water_intake"], 0.1)
-            physical_activity_level = st.selectbox(
-                "Physical activity level",
-                CATEGORY_OPTIONS["physical_activity_level"],
-            )
+            with st.container(border=True):
+                st.markdown("<div class='assessment-card-heading'><span>🌙</span><div><h3>Lifestyle</h3><p>Daily habits and activity</p></div></div>", unsafe_allow_html=True)
+                sleep_duration = st.slider("Sleep duration (hours)", 3.0, 11.0, NUMERIC_DEFAULTS["sleep_duration"], 0.5)
+                exercise_duration = st.slider("Exercise duration (minutes)", 0, 240, NUMERIC_DEFAULTS["exercise_duration"], 5)
+                water_intake = st.slider("Water intake (liters)", 0.5, 6.0, NUMERIC_DEFAULTS["water_intake"], 0.1)
+                step_count = st.number_input("Daily steps", 0, 30000, NUMERIC_DEFAULTS["step_count"], step=500)
+                physical_activity_level = st.selectbox("Physical activity level", CATEGORY_OPTIONS["physical_activity_level"])
         with health:
-            st.markdown("#### Health")
-            heart_rate = st.number_input("Resting heart rate", 40, 140, NUMERIC_DEFAULTS["heart_rate"])
-            bmi = st.number_input("BMI", 12.0, 45.0, NUMERIC_DEFAULTS["bmi"], step=0.1)
-            calorie_expenditure = st.number_input(
-                "Calorie expenditure",
-                800,
-                5000,
-                NUMERIC_DEFAULTS["calorie_expenditure"],
-                step=50,
-            )
-            stress_level = st.selectbox("Stress level", CATEGORY_OPTIONS["stress_level"])
-            sleep_quality = st.selectbox("Sleep quality", CATEGORY_OPTIONS["sleep_quality"])
-        with personal:
-            st.markdown("#### Personal Information")
-            diet_type = st.selectbox("Diet type", CATEGORY_OPTIONS["diet_type"])
-            smoking_alcohol = st.selectbox("Smoking or alcohol exposure", CATEGORY_OPTIONS["smoking_alcohol"])
-            gender = st.selectbox("Gender", CATEGORY_OPTIONS["gender"])
+            with st.container(border=True):
+                st.markdown("<div class='assessment-card-heading'><span>❤️</span><div><h3>Health Metrics</h3><p>Current wellbeing indicators</p></div></div>", unsafe_allow_html=True)
+                bmi = st.number_input("BMI", 12.0, 45.0, NUMERIC_DEFAULTS["bmi"], step=0.1)
+                heart_rate = st.number_input("Resting heart rate", 40, 140, NUMERIC_DEFAULTS["heart_rate"])
+                calorie_expenditure = st.number_input("Calorie expenditure", 800, 5000, NUMERIC_DEFAULTS["calorie_expenditure"], step=50)
+                stress_level = st.selectbox("Stress level", CATEGORY_OPTIONS["stress_level"])
+                sleep_quality = st.selectbox("Sleep quality", CATEGORY_OPTIONS["sleep_quality"])
+
+        with st.container(border=True):
+            st.markdown("<div class='assessment-card-heading'><span>👤</span><div><h3>Personal Information</h3><p>Profile preferences and context</p></div></div>", unsafe_allow_html=True)
+            personal_one, personal_two, personal_three = st.columns(3, gap="large")
+            with personal_one:
+                diet_type = st.selectbox("Diet type", CATEGORY_OPTIONS["diet_type"])
+            with personal_two:
+                smoking_alcohol = st.selectbox("Smoking or alcohol exposure", CATEGORY_OPTIONS["smoking_alcohol"])
+            with personal_three:
+                gender = st.selectbox("Gender", CATEGORY_OPTIONS["gender"])
 
         submitted = st.form_submit_button("Run Prediction", width="stretch")
 
