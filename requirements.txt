@@ -8,5 +8,4 @@ joblib
 matplotlib
 seaborn
 reportlab
-shap
 Pillow

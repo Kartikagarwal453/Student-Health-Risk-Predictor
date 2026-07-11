@@ -184,6 +184,9 @@ try:
     shap.plots.waterfall(explanation, show=False, max_display=12)
     st.pyplot(plt.gcf(), clear_figure=True)
 except Exception as exc:
-    st.info(f"SHAP explanations are available when compatible SHAP/XGBoost dependencies load successfully. Details: {exc}")
+    st.info(
+        "Optional SHAP explanations are not installed in this deployment. "
+        "Feature importance and validation diagnostics remain available."
+    )
 
 render_footer()
