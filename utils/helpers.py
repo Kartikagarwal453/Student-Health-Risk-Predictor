@@ -52,7 +52,7 @@ def render_header(prediction_count: int = 0) -> None:
     """Render a consistent compact product header."""
 
     logo = f"<img src='data:image/png;base64,{__import__('base64').b64encode(LOGO_PATH.read_bytes()).decode()}' />" if LOGO_PATH.exists() else ""
-    st.markdown(f"<div class='topbar'>{logo}<div class='topbar-title'><strong>{APP_TITLE}</strong><span>{APP_TAGLINE}</span></div><div class='topbar-stat'><span>MODEL</span><strong>XGBoost</strong></div><div class='topbar-stat'><span>PREDICTIONS</span><strong>{prediction_count}</strong></div><div class='topbar-stat time'><span>LOCAL TIME</span><strong>{datetime.now().strftime('%H:%M')}</strong></div></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='topbar'>{logo}<div class='topbar-title'><strong>{APP_TITLE}</strong><span>{APP_TAGLINE}</span></div><div class='topbar-stat'><span>MODEL</span><strong>XGBoost</strong></div><div class='topbar-stat'><span>PREDICTIONS</span><strong>{prediction_count}</strong></div>", unsafe_allow_html=True)
 
 
 def render_footer() -> None:
